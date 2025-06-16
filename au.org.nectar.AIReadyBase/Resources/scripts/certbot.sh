@@ -30,4 +30,4 @@ certbot --nginx --agree-tos --no-eff-email --redirect \
 # display certificate fingerprint
 openssl x509 -noout -fingerprint -sha256 -inform pem -in $CRT
 
-# vim: ts=2 sw=2 :
+echo "Certbot setup complete"

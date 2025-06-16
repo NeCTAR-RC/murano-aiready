@@ -75,4 +75,4 @@ set +x
 PASSWORD="$2"
 echo "${USERNAME}:${PASSWORD}" | chpasswd
 
-# vim: ts=2 sw=2 :
+echo "Setup complete"
