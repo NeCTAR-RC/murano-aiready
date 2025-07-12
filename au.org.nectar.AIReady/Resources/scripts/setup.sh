@@ -76,3 +76,4 @@ PASSWORD="$2"
 echo "${USERNAME}:${PASSWORD}" | chpasswd
 
 echo "Setup complete"
+exit 0

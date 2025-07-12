@@ -10,15 +10,17 @@
 #  License for the specific language governing permissions and limitations
 #  under the License.
 
-Format: 1.0
-Type: Application
-FullName: au.org.nectar.AIReadyBase
-Name: AI Ready
-Description: |
-  A lightweight Python environment with essential libraries for data analysis, machine learning, and AI development.
-  Ideal for users starting their AI journey or requiring a clean, flexible foundation for custom workflows.
-Author: NeCTAR and Intersect 3AI
-Tags:
-  - BigData
-Classes:
- au.org.nectar.AIReadyBase: AIReadyBase.yaml
+FormatVersion: 2.0.0
+Name: Setup
+
+Parameters:
+  password: $password
+  username: $username
+
+Body: |
+  return setup('\'' + args.username + '\' \'' + args.password.replace("'", "") + '\'').stdout
+
+Scripts:
+  setup:
+    Type: Application
+    EntryPoint: setup.sh

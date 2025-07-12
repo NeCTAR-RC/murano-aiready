@@ -11,22 +11,15 @@
 #  under the License.
 
 FormatVersion: 2.0.0
-Version: 1.0.0
-Name: Setup
+Name: Certbot
 
 Parameters:
-  password: $password
-  username: $username
+  fqdn: $fqdn
 
 Body: |
-  return setup('\'' + args.username + '\' \'' + args.password.replace("'", "") + '\'').stdout
+  return certbot(args.fqdn).stdout
 
 Scripts:
-  setup:
+  certbot:
     Type: Application
-    Version: 1.0.0
-    EntryPoint: setup.sh
-    Files: []
-    Options:
-      captureStdout: true
-      captureStderr: true
+    EntryPoint: certbot.sh

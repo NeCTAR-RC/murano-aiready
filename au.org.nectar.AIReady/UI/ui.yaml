@@ -23,7 +23,7 @@ Templates:
         ?:
           type: io.murano.resources.CinderVolume
         size: $.instanceConfiguration.diskSize
-        sourceImage: c225c2e8-9cdf-4d29-99e2-a3d4e69ccc14
+        sourceImage: dict("base"=>"3b120e1c-1e5a-4549-9ab2-f58212bf917d", "pytorch"=>"eadb1f93-e148-4ab9-aa86-2bc7318ee79f", "torchvision"=>"14420aa0-625d-40c0-9bc9-dc9ef6a33bdd", "tensorflow"=>"f3c6b862-ce9d-453e-acac-531238e9e0e3", "genai-llm"=>"4b93bb0c-589a-451a-9072-b04afac3f8f5").get($.environmentConfiguration.environment)
         availabilityZone: $.instanceConfiguration.availabilityZone
       bootIndex: 0
       deviceName: vda
@@ -31,7 +31,7 @@ Templates:
 
 Application:
   ?:
-    type: au.org.nectar.AIReadyBase
+    type: au.org.nectar.AIReady
   username: $.userConfiguration.username
   password: $.userConfiguration.password
   instance:
@@ -41,7 +41,8 @@ Application:
     flavor: $.instanceConfiguration.flavor
     keyname: $.instanceConfiguration.keyPair
     availabilityZone: $.instanceConfiguration.availabilityZone
-    volumes: switch($.volumeConfiguration.volume, $=''=>null, $!=null=>$dataVolume)
+    volumes: switch($.volumeConfiguration.volume,
+                    $=''=>null, $!=null=>$dataVolume)
     blockDevices: $bootVolume
   recordSet:
     ?:
@@ -50,6 +51,23 @@ Application:
     name: generateHostname($.recordSetConfiguration.unitNamingPattern, 1)
 
 Forms:
+  - environmentConfiguration:
+      fields:
+        - name: environment
+          type: choice
+          choices: [
+            ["base", "Base Python Environment"],
+            ["pytorch", "PyTorch"],
+            ["torchvision", "PyTorch and TorchVision"],
+            ["tensorflow", "TensorFlow"],
+            ["genai-llm", "Generative AI and Large Language Models (LLMs)"],
+          ]
+          label: Environment
+          descriptionTitle: environment
+          description: >-
+            Select the Python environment that best suits your activity.
+            For details, see
+            https://support.ehelp.edu.au/a/solutions/articles/6000279725
   - instanceConfiguration:
       fields:
         - name: flavor
@@ -115,8 +133,8 @@ Forms:
             invalid: Just lowercase letters, numbers and hyphens are allowed.
           helpText: Just lowercase letters, numbers and hyphens are allowed.
           description: >-
-            Specify a string, that will be used in instance hostname and possible
-            DNS entry. Just letters, numbers and hyphens are allowed.
+            Specify a string, that will be used in instance hostname and
+            possible DNS entry. Just letters, numbers and hyphens are allowed.
         - name: zone
           type: zone
           label: DNS zone
