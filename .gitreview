@@ -1,5 +1,5 @@
 [gerrit]
 host=review.rc.nectar.org.au
 port=29418
-project=NeCTAR-RC/murano-aiready-base.git
+project=NeCTAR-RC/murano-aiready.git
 defaultbranch=master
