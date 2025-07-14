@@ -10,7 +10,7 @@ IMAGE_NAMES := \
 
 .PHONY: all build clean upload check public update-image
 
-all: clean update-image package.zip
+all: clean update-images package.zip
 
 build: package.zip
 
