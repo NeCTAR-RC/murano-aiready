@@ -27,7 +27,7 @@ public:
 	murano package-update --is-public true $$package_id
 
 update-images:
-	python3 update_image_ids.py
+	python3 update_image_ids.py --verbose
 
 package.zip:
 	cd $(TARGET) && zip -r ../$@ *

@@ -99,8 +99,8 @@ Forms:
           type: integer
           label: Disk size
           required: true
-          minValue: 50
-          initial: 50
+          minValue: 60
+          initial: 60
           description: >-
             Specify disk size which is going to be created from image
   - volumeConfiguration:
