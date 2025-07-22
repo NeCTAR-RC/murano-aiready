@@ -13,11 +13,6 @@
 Version: 2.4
 
 Templates:
-  dataVolume:
-    '/dev/vdb':
-      ?:
-        type: io.murano.resources.ExistingCinderVolume
-      openstackId: $.volumeConfiguration.volume
   bootVolume:
     - volume:
         ?:
@@ -41,8 +36,6 @@ Application:
     flavor: $.instanceConfiguration.flavor
     keyname: $.instanceConfiguration.keyPair
     availabilityZone: $.instanceConfiguration.availabilityZone
-    volumes: switch($.volumeConfiguration.volume,
-                    $=''=>null, $!=null=>$dataVolume)
     blockDevices: $bootVolume
   recordSet:
     ?:
@@ -103,24 +96,6 @@ Forms:
           initial: 60
           description: >-
             Specify disk size which is going to be created from image
-  - volumeConfiguration:
-      fields:
-        - name: title
-          type: string
-          required: false
-          hidden: true
-          description: >-
-            It is recommended that provide a volume for the data storage of
-            this application. If provided, all user data will be stored on
-            this volume and will persist even if the application is deleted.
-        - name: volume
-          type: volume
-          label: Existing Volume
-          description: >-
-            You can create a new volume from the Project > Volumes > Volumes
-            tab and must be created in the same Availablity Zone as your
-            application.
-          required: false
   - recordSetConfiguration:
       fields:
         - name: unitNamingPattern
