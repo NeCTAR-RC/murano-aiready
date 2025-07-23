@@ -18,7 +18,7 @@ Templates:
         ?:
           type: io.murano.resources.CinderVolume
         size: $.instanceConfiguration.diskSize
-        sourceImage: dict("base"=>"3b120e1c-1e5a-4549-9ab2-f58212bf917d", "pytorch"=>"eadb1f93-e148-4ab9-aa86-2bc7318ee79f", "torchvision"=>"14420aa0-625d-40c0-9bc9-dc9ef6a33bdd", "tensorflow"=>"f3c6b862-ce9d-453e-acac-531238e9e0e3", "genai-llm"=>"4b93bb0c-589a-451a-9072-b04afac3f8f5").get($.environmentConfiguration.environment)
+        sourceImage: $.environmentConfiguration.environment
         availabilityZone: $.instanceConfiguration.availabilityZone
       bootIndex: 0
       deviceName: vda
@@ -49,11 +49,11 @@ Forms:
         - name: environment
           type: choice
           choices: [
-            ["base", "Base Python Environment"],
-            ["pytorch", "PyTorch"],
-            ["torchvision", "PyTorch and TorchVision"],
-            ["tensorflow", "TensorFlow"],
-            ["genai-llm", "Generative AI and Large Language Models (LLMs)"],
+            ["NeCTAR AI Ready Base", "Base Python Environment"],
+            ["NeCTAR AI Ready with PyTorch", "PyTorch"],
+            ["NeCTAR AI Ready with PyTorch and TorchVision", "PyTorch and TorchVision"],
+            ["NeCTAR AI Ready with TensorFlow", "TensorFlow"],
+            ["NeCTAR AI Ready with GenAI and LLMs", "Generative AI and Large Language Models (LLMs)"],
           ]
           label: Environment
           descriptionTitle: environment
