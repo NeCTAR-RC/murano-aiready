@@ -35,5 +35,10 @@ set +x
 PASSWORD="$2"
 echo "${USERNAME}:${PASSWORD}" | chpasswd
 
+# Hotfix for JupyterHub config issue - can remove once images are rebuilt
+# https://review.rc.nectar.org.au/c/NeCTAR-RC/nectar-images/+/58661
+sed -i 's/^c.SystemdSpawner.readwrite_paths/#c.SystemdSpawner.readwrite_paths/g' /etc/jupyterhub/jupyterhub_config.py
+systemctl restart jupyterhub.service
+
 echo "Setup complete"
 exit 0
