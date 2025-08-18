@@ -90,12 +90,14 @@ Forms:
             the Availability Zone of the volume.
         - name: diskSize
           type: integer
-          label: Disk size
+          label: Disk size (GB)
           required: true
           minValue: 60
-          initial: 60
+          initial: 100
           description: >-
-            Specify disk size which is going to be created from image
+            Specify disk size in GB which is going to be created from image.
+            The minimum size we allow is 60GB, and can be increased depending
+            on your workload.
   - recordSetConfiguration:
       fields:
         - name: unitNamingPattern
