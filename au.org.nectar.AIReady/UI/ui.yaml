@@ -60,7 +60,7 @@ Forms:
           description: >-
             Select the Python environment that best suits your activity.
             For details, see
-            https://support.ehelp.edu.au/a/solutions/articles/6000279725
+            https://support.ehelp.edu.au/support/solutions/articles/6000280865
   - instanceConfiguration:
       fields:
         - name: flavor
